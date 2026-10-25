@@ -17,9 +17,11 @@ Live at **https://helenawholesale.com**, served by GitHub Pages from `main`.
 
 ## The Manifest (inquiry form)
 
-The site's signature element is an inquiry form styled as a bill of lading. Submissions go through [Web3Forms](https://web3forms.com) to the business inbox.
+The site's signature element is an inquiry form styled as a bill of lading. Submissions are relayed by [FormSubmit](https://formsubmit.co), which needs no account, to helenawholesalers@gmail.com. The endpoint is set in `data-endpoint` on `<form id="manifest-form">` in `index.html`.
 
-**To connect it:** create an access key at web3forms.com for the receiving inbox. Then paste the key into `data-access-key=""` on `<form id="manifest-form">` in `index.html`. Until a key is set, the form asks visitors to call 406-439-9079 and quote their reference number.
+**Activation (one time):** the first Manifest triggers an "Activate Form" email to helenawholesalers@gmail.com. Click it once and submissions start arriving. The activation email also gives a random alias string. Put it in place of the email address in `data-endpoint` (`https://formsubmit.co/ajax/<alias>`) so the address no longer appears in the page source.
+
+Email: info@helenawholesale.com forwards to helenawholesalers@gmail.com through Forward Email (MX and TXT records in GoDaddy DNS).
 
 ## Local preview
 

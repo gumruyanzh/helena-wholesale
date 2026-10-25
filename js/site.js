@@ -172,8 +172,8 @@
         return;
       }
 
-      var key = form.getAttribute('data-access-key');
-      if (!key) {
+      var endpoint = form.getAttribute('data-endpoint');
+      if (!endpoint) {
         setStatus('Online filing is being connected. Please call ' + PHONE + ' and quote reference ' + ref + '.', 'error');
         return;
       }
@@ -184,9 +184,10 @@
       delete data.botcheck;
 
       var payload = {
-        access_key: key,
-        subject: 'Manifest ' + ref + ' — ' + data.side + ' — ' + data.company,
-        from_name: 'helenawholesale.com Manifest',
+        _subject: 'Manifest ' + ref + ' — ' + data.side + ' — ' + data.company,
+        _replyto: data.email,
+        _template: 'table',
+        _captcha: 'false',
         reference: ref,
         filed: stampDate
       };
@@ -197,12 +198,12 @@
       btn.textContent = 'Filing…';
       setStatus('', null);
 
-      fetch('https://api.web3forms.com/submit', {
+      fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload)
       })
-        .then(function (res) { return res.json().then(function (j) { return { ok: res.ok && j.success, body: j }; }); })
+        .then(function (res) { return res.json().then(function (j) { return { ok: res.ok && String(j.success) === 'true', body: j }; }); })
         .then(function (r) {
           if (!r.ok) throw new Error((r.body && r.body.message) || 'Submission failed');
           form.classList.add('is-filed');
