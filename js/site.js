@@ -186,7 +186,7 @@
       var payload = {
         access_key: key,
         subject: 'Manifest ' + ref + ' — ' + data.side + ' — ' + data.company,
-        from_name: 'helenalogistics.com Manifest',
+        from_name: 'helenawholesale.com Manifest',
         reference: ref,
         filed: stampDate
       };

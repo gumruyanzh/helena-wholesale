@@ -2,7 +2,7 @@
 
 The static marketing site for **Helena Wholesale Distributions Inc**, a general-merchandise wholesaler and merchandise broker at 1001 South Main Street, Suite 49, Kalispell, Montana 59901 (406-439-9079).
 
-Live at **https://helenalogistics.com**, served by GitHub Pages from `main`.
+Live at **https://helenawholesale.com**, served by GitHub Pages from `main`.
 
 ## Structure
 
