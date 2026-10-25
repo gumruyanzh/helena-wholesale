@@ -28,7 +28,9 @@
   var refEl = $('#mf-ref'), dateEl = $('#mf-date'), stampDateEl = $('#mf-stamp-date');
   if (refEl) refEl.textContent = ref;
   if (dateEl) dateEl.textContent = stampDate;
-  if (stampDateEl) stampDateEl.textContent = stampDate + ' · ' + ref;
+  if (stampDateEl) stampDateEl.textContent = stampDate;
+  var stampRefEl = $('#mf-stamp-ref');
+  if (stampRefEl) stampRefEl.textContent = ref;
 
   // ---------- Side (Supplier / Buyer) ----------
   var form = $('#manifest-form');
@@ -108,8 +110,34 @@
     status.classList.toggle('is-ok', kind === 'ok');
   }
 
+  var FIELD_NAMES = { company: 'company', name: 'contact name', email: 'email', goods: 'description of goods' };
+  var ERRORS = {
+    company: 'Enter your company name.',
+    name: 'Enter a contact name.',
+    email: 'Enter a valid email address, like name@company.com.',
+    goods: 'Describe the goods involved.'
+  };
+  if (form) {
+    Object.keys(ERRORS).forEach(function (n) {
+      var el = form.elements[n];
+      if (!el) return;
+      var p = document.createElement('p');
+      p.className = 'field-error';
+      p.id = 'err-' + n;
+      p.hidden = true;
+      el.insertAdjacentElement('afterend', p);
+      el.setAttribute('aria-describedby', p.id);
+    });
+  }
+  function showError(el, msg) {
+    var p = document.getElementById('err-' + el.name);
+    if (!p) return;
+    p.textContent = msg || '';
+    p.hidden = !msg;
+  }
+
   function validate() {
-    var firstBad = null;
+    var firstBad = null, bad = [];
     var side = $('input[name="side"]:checked', form);
     var sideErr = $('#err-side');
     if (sideErr) sideErr.hidden = !!side;
@@ -120,8 +148,11 @@
       var v = el.value.trim();
       var ok = v.length > 0 && (el.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
       el.setAttribute('aria-invalid', ok ? 'false' : 'true');
-      if (!ok && !firstBad) firstBad = el;
+      showError(el, ok ? '' : ERRORS[el.name]);
+      if (!ok) { bad.push(FIELD_NAMES[el.name] || el.name); if (!firstBad) firstBad = el; }
     });
+    if (!side) bad.unshift('filing as');
+    validate.missing = bad;
     if (firstBad) firstBad.focus();
     return !firstBad;
   }
@@ -129,7 +160,7 @@
   if (form) {
     $$('input, textarea', form).forEach(function (el) {
       el.addEventListener('input', function () {
-        if (el.getAttribute('aria-invalid') === 'true') el.setAttribute('aria-invalid', 'false');
+        if (el.getAttribute('aria-invalid') === 'true') { el.setAttribute('aria-invalid', 'false'); showError(el, ''); }
       });
     });
 
@@ -137,7 +168,7 @@
       e.preventDefault();
       if (form.classList.contains('is-filed')) return;
       if (!validate()) {
-        setStatus('Please complete the highlighted fields.', 'error');
+        setStatus('Please check: ' + validate.missing.join(', ') + '.', 'error');
         return;
       }
 
@@ -178,6 +209,7 @@
           $$('input, textarea, select', form).forEach(function (el) { el.disabled = true; });
           btn.textContent = 'Filed';
           setStatus('Manifest ' + ref + ' received. We will reply within one business day.', 'ok');
+          status.focus();
         })
         .catch(function () {
           btn.disabled = false;

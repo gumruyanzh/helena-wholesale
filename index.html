@@ -75,7 +75,7 @@
       </nav>
       <div class="topbar__actions">
         <a class="phone-link" href="tel:+14064399079">406-439-9079</a>
-        <a class="btn btn--stamp btn--sm" href="#manifest"><span class="hide-sm">File a&nbsp;</span>Manifest</a>
+        <a class="btn btn--stamp btn--sm" href="#manifest"><span class="hide-sm">File a</span>Manifest</a>
       </div>
     </div>
   </header>
@@ -88,7 +88,7 @@
         <div class="hero__copy">
           <p class="eyebrow eyebrow--light">Wholesaler &amp; Merchandise Broker · Kalispell, Montana</p>
           <h1 id="hero-title">General merchandise,<br><em>moved with care.</em></h1>
-          <p class="hero__lede">Helena Wholesale Distributions Inc connects the suppliers who make goods with the businesses that sell them, from one office in the Flathead Valley.</p>
+          <p class="hero__lede">Helena Wholesale Distributions Inc connects the suppliers who make or own goods with the businesses that buy them, from one office in the Flathead Valley.</p>
           <div class="hero__ctas">
             <a class="btn btn--kraft" href="#manifest" data-side="supplier">Supply with us</a>
             <a class="btn btn--ghost" href="#manifest" data-side="buyer">Buy with us</a>
@@ -202,7 +202,7 @@
                 <a class="btn btn--stamp" href="#manifest" data-side="buyer">File as a Buyer</a>
               </div>
               <ol class="benefits">
-                <li><strong>Sourcing.</strong> Tell us what you need and we'll find the supply.</li>
+                <li><strong>Sourcing.</strong> Tell us what you need and we'll work to source it.</li>
                 <li><strong>Flexible lots.</strong> Mixed lots or volume orders, sized to your business.</li>
                 <li><strong>Fewer vendors.</strong> Many lines through one account.</li>
                 <li><strong>One contact.</strong> A real person you can reach, based in Kalispell.</li>
@@ -228,8 +228,8 @@
           </li>
           <li class="route__stop reveal">
             <span class="route__no">02</span>
-            <h3>We review &amp; call you</h3>
-            <p>Someone from Helena reads your Manifest and replies within one business day to talk it through.</p>
+            <h3>We review &amp; reply</h3>
+            <p>Someone from Helena reads your Manifest and replies within one business day, by phone or email as you prefer, to talk it through.</p>
           </li>
           <li class="route__stop reveal">
             <span class="route__no">03</span>
@@ -271,14 +271,14 @@
               <legend class="manifest__label"><span class="manifest__box">1</span>Filing as</legend>
               <div class="side-choice">
                 <label class="side-choice__opt">
-                  <input type="radio" name="side" value="Supplier" required>
+                  <input type="radio" name="side" value="Supplier" required aria-describedby="err-side">
                   <span class="side-choice__stamp">
                     <strong>Supplier</strong>
                     <small>I have goods to place</small>
                   </span>
                 </label>
                 <label class="side-choice__opt">
-                  <input type="radio" name="side" value="Buyer">
+                  <input type="radio" name="side" value="Buyer" aria-describedby="err-side">
                   <span class="side-choice__stamp">
                     <strong>Buyer</strong>
                     <small>I'm sourcing goods</small>
@@ -305,12 +305,12 @@
                     <input id="mf-email" name="email" type="email" autocomplete="email" required>
                   </div>
                   <div>
-                    <label for="mf-phone">Phone</label>
+                    <label for="mf-phone">Phone <span class="optional">(optional)</span></label>
                     <input id="mf-phone" name="phone" type="tel" autocomplete="tel">
                   </div>
                 </div>
                 <div class="field">
-                  <label for="mf-location">City / State</label>
+                  <label for="mf-location">City / State <span class="optional">(optional)</span></label>
                   <input id="mf-location" name="location" type="text" autocomplete="address-level2">
                 </div>
               </div>
@@ -355,13 +355,14 @@
               <div class="manifest__submit">
                 <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <button class="btn btn--stamp btn--lg" type="submit">File Manifest</button>
-                <p class="manifest__status" id="mf-status" role="status" aria-live="polite"></p>
+                <p class="manifest__status" id="mf-status" role="status" aria-live="polite" tabindex="-1"></p>
               </div>
             </div>
 
             <div class="stamp" id="mf-stamp" aria-hidden="true">
               <span class="stamp__word">Received</span>
               <span class="stamp__line" id="mf-stamp-date"></span>
+              <span class="stamp__line" id="mf-stamp-ref"></span>
               <span class="stamp__line">Helena · Kalispell MT</span>
             </div>
           </div>
@@ -386,7 +387,7 @@
             <a class="btn btn--outline" href="tel:+14064399079">Call the office</a>
           </div>
         </div>
-        <a class="locator" href="https://www.google.com/maps/search/?api=1&amp;query=1001+South+Main+Street+Suite+49+Kalispell+MT+59901" target="_blank" rel="noopener" aria-label="Open 1001 South Main Street, Kalispell in Google Maps">
+        <a class="locator" href="https://www.google.com/maps/search/?api=1&amp;query=1001+South+Main+Street+Suite+49+Kalispell+MT+59901" target="_blank" rel="noopener" aria-label="1001 S Main St, Suite 49, Kalispell. Open in Maps (opens in new tab)">
           <div class="locator__map" aria-hidden="true">
             <span class="locator__road locator__road--main"><em>S Main St · US-93</em></span>
             <span class="locator__road locator__road--cross"></span>
